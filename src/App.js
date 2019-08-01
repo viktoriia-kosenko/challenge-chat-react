@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import NavBar from "./components/Navbar";
+import { BrowserRouter, Route } from "react-router-dom";
+import AllMessages from "./components/AllMessages";
+import LatestMessages from "./components/LatestMessages";
+//import Search from "./components/SearchBar";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <NavBar />
+          <Route path="/messages" exact component={AllMessages} />
+          <Route path="/messages/latest" component={LatestMessages} />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
