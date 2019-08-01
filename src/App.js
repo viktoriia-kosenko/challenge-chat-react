@@ -4,7 +4,7 @@ import NavBar from "./components/Navbar";
 import { BrowserRouter, Route } from "react-router-dom";
 import AllMessages from "./components/AllMessages";
 import LatestMessages from "./components/LatestMessages";
-//import Search from "./components/SearchBar";
+import Search from "./components/SearchBar";
 
 class App extends Component {
   render() {
@@ -14,6 +14,7 @@ class App extends Component {
           <NavBar />
           <Route path="/messages" exact component={AllMessages} />
           <Route path="/messages/latest" component={LatestMessages} />
+          <Route path="/messages/search" component={Search} />
         </div>
       </BrowserRouter>
     );

@@ -15,6 +15,9 @@ const NavBar = () => {
           <li>
             <Link to="/messages/latest">Latest</Link>
           </li>
+          <li>
+            <Link to="/messages/Search">Search</Link>
+          </li>
         </ul>
       </div>
     </nav>
