@@ -71,9 +71,9 @@ class Search extends Component {
                 <h5>Sorry, no result</h5>
               </div>
             ) : (
-              this.state.messages.map((message, index) => {
+              this.state.messages.map(message => {
                 return (
-                  <div className="post card" key={index}>
+                  <div className="post card" key={message.id}>
                     <DisplayOneMessage message={message} />
                   </div>
                 );

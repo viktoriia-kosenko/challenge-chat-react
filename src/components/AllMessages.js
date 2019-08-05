@@ -8,20 +8,38 @@ class AllMessages extends Component {
     this.state = { messages: [] };
   }
 
-  componentDidMount() {
+  fetchMessages = () => {
     fetch("http://localhost:3000/messages")
       .then(res => res.json())
       .then(messages => {
         this.setState({ messages: messages });
       });
+    console.log("updated");
+  };
+
+  componentDidMount() {
+    this.fetchMessages();
+    console.log("componentDidMount");
+    this.timer = setInterval(() => this.fetchMessages(), 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 
   addMessages = () => {
-    fetch("http://localhost:3000/messages")
-      .then(res => res.json())
-      .then(messages => {
-        this.setState({ messages: messages });
-      });
+    this.fetchMessages();
+  };
+
+  onClickDelete = id => {
+    console.log(id);
+    fetch(`http://localhost:3000/messages/${id}`, {
+      method: "delete"
+    })
+      .then(response => response.json())
+      .then(json => console.log(json));
+    this.fetchMessages();
   };
 
   render() {
@@ -31,9 +49,11 @@ class AllMessages extends Component {
         <div className="container">
           {this.state.messages.map((message, index) => {
             return (
-              <div className="post card" key={index}>
+              <div className="post card" key={message.id}>
                 <DisplayOneMessage message={message} />
-                <button>delete</button>
+                <button onClick={() => this.onClickDelete(message.id)}>
+                  delete
+                </button>
                 <button>edit</button>
               </div>
             );
