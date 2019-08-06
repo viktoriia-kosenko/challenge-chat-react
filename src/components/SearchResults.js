@@ -7,7 +7,7 @@ class SearchResult extends Component {
   componentDidMount() {
     console.log(this.props.searchParam);
     var url =
-      "http://localhost:3000/messages/search?from=" +
+      "https://secret-hollows-92590.herokuapp.com/messages/search?from=" +
       this.props.searchParam.from +
       "&text=" +
       this.props.searchParam.text;

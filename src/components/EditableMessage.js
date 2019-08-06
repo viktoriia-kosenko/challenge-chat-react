@@ -16,7 +16,7 @@ class EditableMessage extends Component {
     //after i caught modified message and author name in state, i pass this info to the server
     event.preventDefault();
     const id = this.props.message.id;
-    const url = `http://localhost:3000/messages/${id}`;
+    const url = `https://secret-hollows-92590.herokuapp.com/messages/${id}`;
     const updateMessage = {
       method: "PUT",
       headers: {

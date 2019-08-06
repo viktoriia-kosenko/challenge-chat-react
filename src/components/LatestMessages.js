@@ -7,7 +7,7 @@ class DisplayMassages extends Component {
     this.state = { messages: [] };
   }
   componentDidMount() {
-    fetch("http://localhost:3000/messages/latest")
+    fetch("https://secret-hollows-92590.herokuapp.com/messages/latest")
       .then(res => res.json())
       .then(messages => {
         this.setState({ messages: messages });

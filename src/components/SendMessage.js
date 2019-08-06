@@ -20,7 +20,10 @@ class SendMessage extends Component {
       }
     };
 
-    fetch("http://localhost:3000/messages", postRequestParameters)
+    fetch(
+      "https://secret-hollows-92590.herokuapp.com/messages",
+      postRequestParameters
+    )
       .then(res => {
         if (res.status >= 200 && res.status < 300) {
           return res.json();

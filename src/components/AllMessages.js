@@ -10,7 +10,7 @@ class AllMessages extends Component {
   }
 
   fetchMessages = () => {
-    fetch("http://localhost:3000/messages")
+    fetch("https://secret-hollows-92590.herokuapp.com/messages")
       .then(res => res.json())
       .then(messages => {
         this.setState({ messages: messages });
@@ -32,7 +32,7 @@ class AllMessages extends Component {
   };
 
   onClickDelete = id => {
-    fetch(`http://localhost:3000/messages/${id}`, {
+    fetch(`https://secret-hollows-92590.herokuapp.com/messages/${id}`, {
       method: "delete"
     });
 

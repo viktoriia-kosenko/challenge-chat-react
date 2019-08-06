@@ -24,7 +24,7 @@ class Search extends Component {
   handleSubmit = event => {
     console.log(this.state);
     event.preventDefault();
-    const url = `http://localhost:3000/messages/search?text=${
+    const url = `https://secret-hollows-92590.herokuapp.com/messages/search?text=${
       this.state.text
     }&from=${this.state.from}`;
     console.log(url);
