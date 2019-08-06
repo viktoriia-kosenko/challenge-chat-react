@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import SendMessage from "./SendMessage";
 import DisplayOneMessage from "./DisplayOneMessage";
+import EditableMessage from "./EditableMessage";
 
 class AllMessages extends Component {
   constructor(props) {
     super(props);
-    this.state = { messages: [] };
+    this.state = { messages: [], selectedEditMessageId: null };
   }
 
   fetchMessages = () => {
@@ -14,12 +15,10 @@ class AllMessages extends Component {
       .then(messages => {
         this.setState({ messages: messages });
       });
-    console.log("updated");
   };
 
   componentDidMount() {
     this.fetchMessages();
-    console.log("componentDidMount");
     this.timer = setInterval(() => this.fetchMessages(), 5000);
   }
 
@@ -33,30 +32,53 @@ class AllMessages extends Component {
   };
 
   onClickDelete = id => {
-    console.log(id);
     fetch(`http://localhost:3000/messages/${id}`, {
       method: "delete"
-    })
-      .then(response => response.json())
-      .then(json => console.log(json));
+    });
+
     this.fetchMessages();
   };
 
+  editMessage = id => {
+    this.setState({
+      selectedEditMessageId: id
+    });
+  };
+
+  saveAndUppdate = () => {
+    this.setState({
+      selectedEditMessageId: null
+    });
+    this.fetchMessages();
+  };
   render() {
     return (
       <div className="container">
         <SendMessage addMessages={this.addMessages} />
         <div className="container">
-          {this.state.messages.map((message, index) => {
-            return (
-              <div className="post card" key={message.id}>
-                <DisplayOneMessage message={message} />
-                <button onClick={() => this.onClickDelete(message.id)}>
-                  delete
-                </button>
-                <button>edit</button>
-              </div>
-            );
+          {this.state.messages.map(message => {
+            if (message.id === this.state.selectedEditMessageId) {
+              return (
+                <div className="post card" key={message.id}>
+                  <EditableMessage
+                    message={message}
+                    saveAndUppdate={this.saveAndUppdate}
+                  />
+                </div>
+              );
+            } else {
+              return (
+                <div className="post card" key={message.id}>
+                  <DisplayOneMessage message={message} />
+                  <button onClick={() => this.onClickDelete(message.id)}>
+                    delete
+                  </button>
+                  <button onClick={() => this.editMessage(message.id)}>
+                    edit
+                  </button>
+                </div>
+              );
+            }
           })}
         </div>
       </div>
